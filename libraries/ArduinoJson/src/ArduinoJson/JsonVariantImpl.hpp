@@ -1,5 +1,5 @@
 // ArduinoJson - arduinojson.org
-// Copyright Benoit Blanchon 2014-2018
+// Copyright Benoit Blanchon 2014-2019
 // MIT License
 
 #pragma once
@@ -23,6 +23,7 @@ inline JsonVariant::JsonVariant(const JsonArray &array) {
     _content.asArray = const_cast<JsonArray *>(&array);
   } else {
     _type = Internals::JSON_UNDEFINED;
+    _content.asArray = 0;  // <- prevent warning 'maybe-uninitialized'
   }
 }
 
@@ -32,6 +33,7 @@ inline JsonVariant::JsonVariant(const JsonObject &object) {
     _content.asObject = const_cast<JsonObject *>(&object);
   } else {
     _type = Internals::JSON_UNDEFINED;
+    _content.asObject = 0;  // <- prevent warning 'maybe-uninitialized'
   }
 }
 

@@ -18,10 +18,10 @@
 
 // Подключаем пин данных DS18B20 к GPIO 15 на ESP8266
 #define ONE_WIRE_BUS 15
-
+WiFiClientSecure client;
 // Initialize Wifi connection to the router
-char ssid[] = "";              // SSID (name) 
-char password[] = "";            // your network key
+char ssid[] = "ZTE-cead1a";              // SSID (name)
+char password[] = "f4b8a7ce";            // your network key
 int status = 0;
 
 
@@ -84,8 +84,9 @@ void setup() {
   Serial.println("WiFi connected");
   Serial.println("IP address: ");
   IPAddress ip = WiFi.localIP();
+ 
   Serial.println(ip);
-
+  client.setInsecure();
   bot.begin();      // Включаем бота
 }
 
@@ -96,7 +97,7 @@ void loop() {
     bot.getUpdates(bot.message[0][1]);   // Включаем API и получаем новые сообщения    
     if (getTemperature() < 23){
     Serial.print("ALARM: "); // Проверяем,если температура ниже указанной, тогда шлем сообщение
-    bot.sendMessage("123456", "Котел скоро потухнет. Подкинь дровишек браток!!!", ""); // Здесь вписываем ID чата с ботом
+    bot.sendMessage("216473175", "Котел скоро потухнет. Подкинь дровишек браток!!!", ""); // Здесь вписываем ID чата с ботом
   }    
     Bot_EchoMessages();   // reply to message with Echo
     Bot_lasttime = millis();

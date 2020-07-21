@@ -1,5 +1,5 @@
 // ArduinoJson - arduinojson.org
-// Copyright Benoit Blanchon 2014-2018
+// Copyright Benoit Blanchon 2014-2019
 // MIT License
 
 #include <ArduinoJson/Polyfills/isInteger.hpp>
@@ -10,6 +10,10 @@ using namespace ArduinoJson::Internals;
 TEST_CASE("isInteger()") {
   SECTION("Null") {
     REQUIRE_FALSE(isInteger(NULL));
+  }
+
+  SECTION("Empty String") {
+    REQUIRE_FALSE(isInteger(""));
   }
 
   SECTION("FloatNotInteger") {
